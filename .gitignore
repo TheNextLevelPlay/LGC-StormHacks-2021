@@ -1,0 +1,7 @@
+.vscode/settings.json
+**/__pycache__
+.env
+googleApiKey
+client_secrets.json
+.idea
+.vscode
