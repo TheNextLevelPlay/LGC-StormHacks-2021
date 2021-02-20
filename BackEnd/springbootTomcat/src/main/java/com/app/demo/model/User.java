@@ -1,5 +1,6 @@
 package com.app.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.lang.reflect.Array;
@@ -21,6 +22,14 @@ public class User {
         this.suggestArrListSize = suggestArrList.size();
         this.askArrListSize = askArrList.size();
     }
+    @JsonCreator
+    public User(@JsonProperty("id")String id, @JsonProperty("ask")ArrayList<String>askArrList, @JsonProperty("suggest")ArrayList<String>suggestArrList, @JsonProperty("suggestSize") int suggestArrListSize, @JsonProperty("askSize") int askArrListSize){
+        this.id = id;
+        this.suggestArrList = suggestArrList;
+        this.askArrList = askArrList;
+        this.suggestArrListSize = suggestArrListSize;
+        this.askArrListSize = askArrListSize;
+    }
 
     public String getId(){
         return this.id;
@@ -31,17 +40,17 @@ public class User {
     }
 
     public ArrayList<String> getAskArrList(){
-        return this.getAskArrList();
+        return this.askArrList;
     }
 
     public void addSuggest(String query){
         this.suggestArrList.add(query);
-        this.suggestArrListSize++;
+        this.suggestArrListSize = this.suggestArrList.size();
     }
 
     public void addAsk(String query){
         this.askArrList.add(query);
-        this.askArrListSize++;
+        this.askArrListSize = this.askArrList.size();
     }
 
     public void removeSuggest(){
@@ -52,5 +61,14 @@ public class User {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", suggestArrList=" + suggestArrList +
+                ", askArrList=" + askArrList +
+                ", suggestArrListSize=" + suggestArrListSize +
+                ", askArrListSize=" + askArrListSize +
+                '}';
+    }
 }

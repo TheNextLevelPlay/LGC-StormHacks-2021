@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 
 @RestController
-public class controller {
+public class userController {
     private ArrayList<User> userArrayList;
 
     @PostConstruct
@@ -29,7 +29,6 @@ public class controller {
 
     @GetMapping("/api/getUserList")
     public ArrayList<User> getUserArrayList(HttpServletResponse response) throws IOException{
-        ObjectMapper mapper = new ObjectMapper();
         response.setStatus(200);
         return userArrayList;
     }
@@ -41,7 +40,7 @@ public class controller {
         for (int i =0 ; i < userArrayList.size();i++){
             if (userArrayList.get(i).getId().equals(id)){
                 foundID = true;
-                userArrayList.get(i).getSuggestArrList().add(query);
+                userArrayList.get(i).addSuggest(query);
             }
         }
         if (!foundID){
@@ -52,8 +51,10 @@ public class controller {
             userArrayList.add(user);
         }
 
+        System.out.println(userArrayList.get(0).toString());
         mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
         response.setStatus(201);
     }
+
 
 }

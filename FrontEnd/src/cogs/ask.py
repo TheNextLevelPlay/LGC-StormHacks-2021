@@ -2,6 +2,7 @@ import discord
 import json
 import os
 import sys
+import requests
 
 from discord.ext import commands
 
@@ -17,6 +18,8 @@ class Ask(commands.Cog):
         usrId = ctx.message.author.id
         query = str(args[0]).strip("\"")
         await ctx.send('<@{}> asked: '.format(ctx.message.author.id) + query)
+        requests.post("http://localhost:8080/api/addSuggestion/" + str(usrId), data = query)
+
 
 def setup(bot):
     bot.add_cog(Ask(bot))
