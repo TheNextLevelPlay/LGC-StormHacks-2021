@@ -11,9 +11,8 @@ client = commands.Bot(command_prefix = '!')
 client.remove_command("help")
 
 token = os.getenv('DISCORD_TOKEN')
-print(token)
 
-extensionList = []
+extensionList = ['cogs.ask']
 
 if __name__ == '__main__':
     for extension in extensionList:
@@ -22,3 +21,5 @@ if __name__ == '__main__':
 @client.event
 async def on_ready():
     print("Bot is ready.")
+
+client.run(token)
