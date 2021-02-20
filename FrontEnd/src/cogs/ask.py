@@ -6,7 +6,7 @@ import sys
 from discord.ext import commands
 
 directory = os.path.dirname(os.path.abspath(__file__))
-bookPath = os.path.join(directory, '../assets/list.json')
+listPath = os.path.join(directory, '../assets/list.json')
 
 class Ask(commands.Cog):
     def __init__(self, bot):
