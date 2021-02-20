@@ -1,6 +1,7 @@
 import requests
 
-def postFunc(query, id):
-    url = 'http://localhost:8080/api/addSuggestion/' + str(id)
+def postSuggest(query, id):
+    requests.post("http://localhost:8080/api/addSuggestion/" + str(id), data = query)
 
-    x = requests.post(url, json = query)
+def postAsk(query, id):
+    requests.post("http://localhost:8080/api/addAsk/" + str(id), data = query)

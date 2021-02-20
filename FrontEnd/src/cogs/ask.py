@@ -4,6 +4,7 @@ import os
 import sys
 import requests
 
+from components.post import postAsk
 from discord.ext import commands
 
 directory = os.path.dirname(os.path.abspath(__file__))
@@ -18,7 +19,7 @@ class Ask(commands.Cog):
         usrId = ctx.message.author.id
         query = str(args[0]).strip("\"")
         await ctx.send('<@{}> asked: '.format(ctx.message.author.id) + query)
-        requests.post("http://localhost:8080/api/addSuggestion/" + str(usrId), data = query)
+        postAsk(query, usrId)
 
 
 def setup(bot):

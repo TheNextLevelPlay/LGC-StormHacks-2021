@@ -56,5 +56,28 @@ public class userController {
         response.setStatus(201);
     }
 
+    @PostMapping("/api/addAsk/{id}")
+    public void addAsk(@PathVariable String id, @RequestBody String query, HttpServletResponse response)  throws IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        Boolean foundID = false;
+        for (int i =0 ; i < userArrayList.size();i++){
+            if (userArrayList.get(i).getId().equals(id)){
+                foundID = true;
+                userArrayList.get(i).addAsk(query);
+            }
+        }
+        if (!foundID){
+            ArrayList<String> suggestArrList = new ArrayList<>();
+            ArrayList<String> askArrList = new ArrayList<>();
+            askArrList.add(query);
+            User user = new User(id, askArrList, suggestArrList);
+            userArrayList.add(user);
+        }
+
+        System.out.println(userArrayList.get(0).toString());
+        mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
+        response.setStatus(201);
+    }
+
 
 }
