@@ -30,12 +30,15 @@ class Resolve(commands.Cog):
                     converter = MemberConverter()
                     usrName = await converter.convert(ctx, args[0])
                     usrId = usrName.id
+                    channel = await usrName.create_dm()
                     if len(args) == 1:
                         await ctx.send("Resolved " + str(usrName) + "'s suggestions")
+                        await channel.send("All suggestions were resolved!")
                         postResolveSuggestAll(usrId)
                     elif len(args) == 2:
                         if self.is_integer(args[1]) is True:
                             await ctx.send("Resolved " + str(usrName) + "'s suggestion index: " + str(args[1]))
+                            await channel.send("Suggestion " + str(args[1]) + " was resolved!")
                             postResolveSuggest(args[1], usrId)
                         else:
                             await ctx.send("Invalid resolve command!")
@@ -56,12 +59,15 @@ class Resolve(commands.Cog):
                     converter = MemberConverter()
                     usrName = await converter.convert(ctx, args[0])
                     usrId = usrName.id
+                    channel = await usrName.create_dm()
                     if len(args) == 1:
                         await ctx.send("Resolved " + str(usrName) + "'s question")
+                        await channel.send("All questions were resolved!")
                         postResolveAskAll(usrId)
                     elif len(args) == 2:
                         if self.is_integer(args[1]) is True:
                             await ctx.send("Resolved " + str(usrName) + "'s question index: " + str(args[1]))
+                            await channel.send("Question " + str(args[1]) + " was resolved!")
                             postResolveAsk(args[1], usrId)
                         else:
                             await ctx.send("Invalid resolve command!")
