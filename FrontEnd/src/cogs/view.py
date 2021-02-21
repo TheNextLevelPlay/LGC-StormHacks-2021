@@ -22,7 +22,14 @@ class View(commands.Cog):
                     usrList = getSuggest(viewId)
                     message = "```\n" + str(user) + "'s Suggestion List:\n"
                     for i in range(len(usrList)):
-                        message += str(i + 1) + ". " + usrList[i] + "\n"
+                        msgLen = len(message)
+                        if msgLen + len(usrList[i]) <= 1900:
+                            message += str(i + 1) + ". " + usrList[i] + "\n"
+                        else:
+                            message += "```"
+                            await ctx.message.author.send(message)
+                            message = "```"
+                            message += str(i + 1) + ". " + usrList[i] + "\n"
                     message += "```"
                     await ctx.message.author.send(message)
                 except:
@@ -34,7 +41,14 @@ class View(commands.Cog):
                     usrList = getAsk(viewId)
                     message = "```\n" + str(user) + "'s Ask List:\n"
                     for i in range(len(usrList)):
-                        message += str(i + 1) + ". " + usrList[i] + "\n"
+                        msgLen = len(message)
+                        if msgLen + len(usrList[i]) <= 1900:
+                            message += str(i + 1) + ". " + usrList[i] + "\n"
+                        else:
+                            message += "```"
+                            await ctx.message.author.send(message)
+                            message = "```"
+                            message += str(i + 1) + ". " + usrList[i] + "\n"
                     message += "```"
                     await ctx.message.author.send(message)
                 except:
