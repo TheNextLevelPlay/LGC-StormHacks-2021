@@ -95,8 +95,6 @@ class View(commands.Cog):
                             message += str(i + 1) + ". " + usrList[i] + "\n"
                     message += "```"
                     await ctx.message.author.send(message)
-                else:
-                    print("Empty List")
             await ctx.send("Lists sent to DMs.")
         else:
             await ctx.send("You do not have permissions to do this.")
@@ -121,8 +119,6 @@ class View(commands.Cog):
                             message += str(i + 1) + ". " + usrList[i] + "\n"
                     message += "```"
                     await ctx.message.author.send(message)
-                else:
-                    print("Empty List")
             await ctx.send("Lists sent to DMs.")
         else:
             await ctx.send("You do not have permissions to do this.")
