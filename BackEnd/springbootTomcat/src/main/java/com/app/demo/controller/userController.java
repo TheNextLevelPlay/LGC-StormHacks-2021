@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +52,6 @@ public class userController {
             userArrayList.add(user);
         }
 
-        System.out.println(userArrayList.get(0).toString());
         mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
         response.setStatus(201);
     }
@@ -74,10 +74,67 @@ public class userController {
             userArrayList.add(user);
         }
 
-        System.out.println(userArrayList.get(0).toString());
         mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
         response.setStatus(201);
     }
 
+    @GetMapping("/api/getSuggestion/all")
+    public ArrayList<String> getSuggestionList(HttpServletResponse response) throws IOException{
+        ArrayList<String> allSuggestionList = new ArrayList<>();
+        for (int i =0; i < userArrayList.size(); i++){
+            for (int j =0; j < userArrayList.get(i).getSuggestArrList().size(); j++){
+                allSuggestionList.add(userArrayList.get(i).getSuggestArrList().get(j));
+            }
+        }
+        response.setStatus(200);
+        return allSuggestionList;
+    }
+
+    @GetMapping("/api/getSuggestion/{id}")
+    public ArrayList<String> getSpecificSuggestionList(@PathVariable String id, HttpServletResponse response) throws IOException{
+        for (int i = 0; i < userArrayList.size(); i++){
+            if (userArrayList.get(i).getId().equals(id)){
+                response.setStatus(200);
+                return userArrayList.get(i).getSuggestArrList();
+            }
+        }
+
+        response.resetBuffer();
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        response.getOutputStream().print(response.getStatus());
+        response.flushBuffer();
+        response.sendError(HttpServletResponse.SC_NOT_FOUND, "ID not found");
+        return null;
+    }
+
+
+    @GetMapping("/api/getAsk/all")
+    public ArrayList<String> getAskList(HttpServletResponse response) throws IOException{
+        ArrayList<String> allAskList = new ArrayList<>();
+        for (int i =0; i < userArrayList.size(); i++){
+            for (int j =0; j < userArrayList.get(i).getAskArrList().size(); j++){
+                allAskList.add(userArrayList.get(i).getAskArrList().get(j));
+            }
+        }
+        response.setStatus(200);
+        return allAskList;
+    }
+
+    @GetMapping("/api/getAsk/{id}")
+    public ArrayList<String> getSpecificAskList(@PathVariable String id, HttpServletResponse response) throws IOException{
+        for (int i = 0; i < userArrayList.size(); i++){
+            if (userArrayList.get(i).getId().equals(id)){
+                response.setStatus(200);
+                return userArrayList.get(i).getAskArrList();
+            }
+        }
+
+        response.resetBuffer();
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        response.getOutputStream().print(response.getStatus());
+        response.flushBuffer();
+        response.sendError(HttpServletResponse.SC_NOT_FOUND, "ID not found");
+        return null;
+    }
 
 }
