@@ -87,11 +87,17 @@ public class userController {
             }
         }
 
+        ArrayList<String> suggestArrList = new ArrayList<>();
+        ArrayList<String> askArrList = new ArrayList<>();
+        User user = new User(id, askArrList, suggestArrList);
+        userArrayList.add(user);
+
+
         response.resetBuffer();
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.getOutputStream().print(response.getStatus());
         response.flushBuffer();
-        return null;
+        return user.getSuggestArrList();
     }
 
     @GetMapping("/api/getAsk/{id}")
@@ -103,11 +109,16 @@ public class userController {
             }
         }
 
+        ArrayList<String> suggestArrList = new ArrayList<>();
+        ArrayList<String> askArrList = new ArrayList<>();
+        User user = new User(id, askArrList, suggestArrList);
+        userArrayList.add(user);
+
         response.resetBuffer();
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.getOutputStream().print(response.getStatus());
         response.flushBuffer();
-        return null;
+        return user.getAskArrList();
     }
 
     @PostMapping("/api/rmSuggest/{id}")
