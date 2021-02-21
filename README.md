@@ -17,8 +17,12 @@ A discord bot that allows the students to raise issues, ask questions, create su
 7. Set the main class as DisConnectApplication.java which is found in the src/main/java directory
 
 - - - - 
-# Commands (note that the only the administrator can use administrator commands) #
+# Commands #
+(note that the only the administrator can use administrator commands)
+
+- - - - 
 ### Administrator Commands ###
 
+- - - - 
 ### Non-Administrator Commands ###
 
