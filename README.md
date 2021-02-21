@@ -18,8 +18,7 @@ A discord bot that allows the students to raise issues, ask questions, create su
 
 - - - - 
 # Commands #
-(note that the only the administrator can use administrator commands)
----------------
+_(note that the only the administrator can use administrator commands)_
 ### Administrator Commands ###
 
 ### Non-Administrator Commands ###
