@@ -13,10 +13,16 @@ class Ask(commands.Cog):
 
     @commands.command()
     async def ask(self, ctx, *args):
-        usrId = ctx.message.author.id
-        query = str(args[0]).strip("\"")
-        await ctx.send('<@{}> asked: '.format(ctx.message.author.id) + query)
-        postAsk(query, usrId)
+        if ctx.message.guild:
+            if len(args) == 1:
+                usrId = ctx.message.author.id
+                query = str(args[0]).strip("\"")
+                await ctx.send('<@{}> asked: '.format(ctx.message.author.id) + query)
+                postAsk(query, usrId)
+            else:
+                await ctx.send("Invalid use. Use !ask \"<message>\"")
+        else:
+            await ctx.send("This command can only be used in a server.")
 
 
 def setup(bot):

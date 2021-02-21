@@ -23,29 +23,33 @@ class RemoveQuery(commands.Cog):
 
     @commands.command()
     async def removeSuggest(self, ctx, *args):
-        usrId = ctx.message.author.id
-        if len(args) == 1:
-            if self.is_integer(args[0]) is True:
-                await ctx.send("Suggestion removed")
-                postResolveSuggest(str(int(args[0]) - 1), usrId)
+        if ctx.message.guild:
+            usrId = ctx.message.author.id
+            if len(args) == 1:
+                if self.is_integer(args[0]) is True:
+                    await ctx.send("Suggestion removed")
+                    postResolveSuggest(str(int(args[0]) - 1), usrId)
+                else:
+                    await ctx.send("Invalid arguments sent: !removeSuggest <index>")
             else:
                 await ctx.send("Invalid arguments sent: !removeSuggest <index>")
         else:
-            await ctx.send("Invalid arguments sent: !removeSuggest <index>")
+            await ctx.send("This command can only be used in a server.")
 
     @commands.command()
     async def removeAsk(self, ctx, *args):
-        usrId = ctx.message.author.id
-        if len(args) == 1:
-            if self.is_integer(args[0]) is True:
-                await ctx.send("Ask removed")
-                postResolveAsk(str(int(args[0]) - 1), usrId)                
+        if ctx.message.guild:
+            usrId = ctx.message.author.id
+            if len(args) == 1:
+                if self.is_integer(args[0]) is True:
+                    await ctx.send("Ask removed")
+                    postResolveAsk(str(int(args[0]) - 1), usrId)                
+                else:
+                    await ctx.send("Invalid arguments sent: !removeSuggest <index>")
             else:
                 await ctx.send("Invalid arguments sent: !removeSuggest <index>")
         else:
-            await ctx.send("Invalid arguments sent: !removeSuggest <index>")
-
-    
+            await ctx.send("This command can only be used in a server.")
 
 def setup(bot):
     bot.add_cog(RemoveQuery(bot))
