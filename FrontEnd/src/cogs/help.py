@@ -23,6 +23,7 @@ class HelpCommand(commands.Cog):
                 helpMsg += "\nView Suggestions - !viewSuggest <user>\n - <user> -  The user's question list you want to look up (Optional) (Checks own list without argument)\n"
                 helpMsg += "\nView All User Questions - !viewSuggestAll\n"
                 helpMsg += "\nView All User Suggestions - !viewSuggestAll\n"
+                helpMsg += "\nView Number of Queries - !mail\n"
             elif args[0] == "remove":
                 helpMsg += "\nRemove Commands:"
                 helpMsg += "\nRemove Question - !removeAsk <index>\n - <index> - The number of the question you want to remove\n"
