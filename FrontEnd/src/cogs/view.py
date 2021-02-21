@@ -15,9 +15,12 @@ class View(commands.Cog):
 
     @commands.command()
     async def viewSuggest(self, ctx, *args):
-        if len(args) == 1:
+        if len(args) == 1 or len(args == 0):
             try:
-                user = ctx.message.mentions[0]
+                if len(args) == 0:
+                    user = ctx.message.author
+                else:
+                    user = ctx.message.mentions[0]
                 if ctx.message.author.guild_permissions.administrator or user == ctx.message.author:
                     viewId = str(user.id)
                     usrList = getSuggest(viewId)
@@ -42,13 +45,16 @@ class View(commands.Cog):
             except:
                 await ctx.send("User not found.")
         else:
-            await ctx.send("Invalid arguments. Use /viewSuggest <user>")
+            await ctx.send("Invalid arguments. Use !viewSuggest <user>")
 
     @commands.command()
     async def viewAsk(self, ctx, *args):
-        if len(args) == 1:
+        if len(args) == 1 or len(args) == 0:
             try:
-                user = ctx.message.mentions[0]
+                if len(args) == 0:
+                    user = ctx.message.author
+                else:
+                    user = ctx.message.mentions[0]
                 if ctx.message.author.guild_permissions.administrator or user == ctx.message.author:
                     viewId = str(user.id)
                     usrList = getAsk(viewId)
@@ -73,7 +79,7 @@ class View(commands.Cog):
             except:
                 await ctx.send("User not found.")
         else:
-            await ctx.send("Invalid arguments. Use /viewAsk <user>")
+            await ctx.send("Invalid arguments. Use !viewAsk <user>")
 
     @commands.command()
     async def viewSuggestAll(self, ctx):

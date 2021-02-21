@@ -4,6 +4,7 @@ import os
 import sys
 import requests
 
+from components.get import *
 from components.post import *
 from discord.ext import commands
 from discord.ext.commands import MemberConverter
@@ -37,15 +38,22 @@ class Resolve(commands.Cog):
                         postResolveSuggestAll(usrId)
                     elif len(args) == 2:
                         if self.is_integer(args[1]) is True:
+                            query = getSuggest(usrId)[int(args[1]) - 1]
                             await ctx.send("Resolved " + str(usrName) + "'s suggestion index: " + str(args[1]))
-                            await channel.send("Suggestion " + str(args[1]) + " was resolved!")
+                            await channel.send("Suggestion " + str(args[1]) + ": \"" + query + " was resolved!")
                             postResolveSuggest(args[1], usrId)
                         else:
-                            await ctx.send("Invalid resolve command!")
+                            await ctx.send("Invalid resolve command! Use !resolveSuggest <user> <index> \"<message>\"")
+                    elif len(args) == 3:
+                        query = getSuggest(usrId)[int(args[1]) - 1]
+                        resolveMsg = str(args[2])
+                        await ctx.send("Resolved " + str(usrName) + "'s suggestion index: " + str(args[1]) + " with message: " + resolveMsg)
+                        await channel.send("```\nSuggestion " + str(args[1]) + ": \"" + query + "\" was resolved with message:\n" + resolveMsg + "\n```")
+                        postResolveSuggest(str(int(args[1]) - 1), usrId)
                     else:
-                        await ctx.send("Invalid resolve command!")
+                        await ctx.send("Invalid resolve command! Use !resolveSuggest <user> <index> \"<message>\"")
                 else:
-                    await ctx.send("Invalid resolve command!")
+                    await ctx.send("Invalid resolve command! Use !resolveSuggest <user> <index> \"<message>\"")
             else:
                 await ctx.send("You do not have permissions to do this.")
         except:
@@ -66,15 +74,22 @@ class Resolve(commands.Cog):
                         postResolveAskAll(usrId)
                     elif len(args) == 2:
                         if self.is_integer(args[1]) is True:
+                            query = getAsk(usrId)[int(args[1]) - 1]
                             await ctx.send("Resolved " + str(usrName) + "'s question index: " + str(args[1]))
-                            await channel.send("Question " + str(args[1]) + " was resolved!")
-                            postResolveAsk(args[1], usrId)
+                            await channel.send("```\nQuestion " + str(args[1]) + ": \"" + query + "\" was resolved!\n```")
+                            postResolveAsk(str(int(args[1]) - 1), usrId)
                         else:
-                            await ctx.send("Invalid resolve command!")
+                            await ctx.send("Invalid resolve command! Use !resolveAsk <user> <index> \"<message>\"")
+                    elif len(args) == 3:
+                        query = getAsk(usrId)[int(args[1]) - 1]
+                        resolveMsg = str(args[2])
+                        await ctx.send("Resolved " + str(usrName) + "'s question index: " + str(args[1]) + " with message: " + resolveMsg)
+                        await channel.send("```\nQuestion " + str(args[1]) + ": \"" + query + "\" was resolved with message:\n" + resolveMsg + "\n```")
+                        postResolveAsk(str(int(args[1]) - 1), usrId)
                     else:
-                        await ctx.send("Invalid resolve command!")
+                        await ctx.send("Invalid resolve command! Use !resolveAsk <user> <index> \"<message>\"")
                 else:
-                    await ctx.send("Invalid resolve command!")
+                    await ctx.send("Invalid resolve command! Use !resolveAsk <user> <index> \"<message>\"")
             else:
                 await ctx.send("You do not have permissions to do this.")
         except:

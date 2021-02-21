@@ -26,24 +26,24 @@ class RemoveQuery(commands.Cog):
         usrId = ctx.message.author.id
         if len(args) == 1:
             if self.is_integer(args[0]) is True:
-                await cwt.send("Suggestion removed")
-                postResolveSuggest(args[0], usrId)
+                await ctx.send("Suggestion removed")
+                postResolveSuggest(str(int(args[0]) - 1), usrId)
             else:
-                await cwt.send("Invalid arguments sent: !removeSuggest <index>")
+                await ctx.send("Invalid arguments sent: !removeSuggest <index>")
         else:
-            await cwt.send("Invalid arguments sent: !removeSuggest <index>")
+            await ctx.send("Invalid arguments sent: !removeSuggest <index>")
 
     @commands.command()
     async def removeAsk(self, ctx, *args):
         usrId = ctx.message.author.id
         if len(args) == 1:
             if self.is_integer(args[0]) is True:
-                await cwt.send("Ask removed")
-                postResolveAsk(args[0], usrId)                
+                await ctx.send("Ask removed")
+                postResolveAsk(str(int(args[0]) - 1), usrId)                
             else:
-                await cwt.send("Invalid arguments sent: !removeSuggest <index>")
+                await ctx.send("Invalid arguments sent: !removeSuggest <index>")
         else:
-            await cwt.send("Invalid arguments sent: !removeSuggest <index>")
+            await ctx.send("Invalid arguments sent: !removeSuggest <index>")
 
     
 
