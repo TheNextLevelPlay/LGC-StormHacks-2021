@@ -19,8 +19,8 @@ class HelpCommand(commands.Cog):
                 helpMsg += "\nSuggest - !suggest \"<message>\"\n - \"<message>\" - The suggestion you want to send in quotations\n"
             elif args[0] == "view":
                 helpMsg += "\nView Commands:"
-                helpMsg += "\nView Questions - !viewAsk <user>\n - <user> - The user's question list you want to look up (Optional)\n"
-                helpMsg += "\nView Suggestions - !viewSuggest <user>\n - <user> -  The user's question list you want to look up (Optional)\n"
+                helpMsg += "\nView Questions - !viewAsk <user>\n - <user> - The user's question list you want to look up (Optional) (Checks own list without argument)\n"
+                helpMsg += "\nView Suggestions - !viewSuggest <user>\n - <user> -  The user's question list you want to look up (Optional) (Checks own list without argument)\n"
                 helpMsg += "\nView All User Questions - !viewSuggestAll\n"
                 helpMsg += "\nView All User Suggestions - !viewSuggestAll\n"
             elif args[0] == "remove":
