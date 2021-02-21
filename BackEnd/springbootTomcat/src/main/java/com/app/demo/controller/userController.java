@@ -91,7 +91,6 @@ public class userController {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.getOutputStream().print(response.getStatus());
         response.flushBuffer();
-        response.sendError(HttpServletResponse.SC_NOT_FOUND, "ID not found");
         return null;
     }
 
@@ -108,17 +107,15 @@ public class userController {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.getOutputStream().print(response.getStatus());
         response.flushBuffer();
-        response.sendError(HttpServletResponse.SC_NOT_FOUND, "ID not found");
         return null;
     }
 
     @PostMapping("/api/rmSuggest/{id}")
     public void removeSuggestionFromList(@PathVariable String id, @RequestBody String index, HttpServletResponse response) throws IOException{
         ObjectMapper mapper = new ObjectMapper();
-
         for (int i = 0; i < userArrayList.size(); i++){
             if (userArrayList.get(i).getId().equals(id)){
-                if (Integer.parseInt(index) < userArrayList.get(i).getSuggestArrList().size()) {
+                if (Integer.parseInt(index) < userArrayList.get(i).getSuggestArrList().size() && userArrayList.get(i).getAskArrList().size() > 0) {
                     response.setStatus(204);
                     System.out.println(index);
                     userArrayList.get(i).removeSuggest(Integer.parseInt(index));
@@ -132,7 +129,6 @@ public class userController {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.getOutputStream().print(response.getStatus());
         response.flushBuffer();
-        response.sendError(HttpServletResponse.SC_NOT_FOUND, "ID not found");
     }
 
     @PostMapping("/api/rmAsk/{id}")
@@ -140,7 +136,7 @@ public class userController {
         ObjectMapper mapper = new ObjectMapper();
         for (int i = 0; i < userArrayList.size(); i++){
             if (userArrayList.get(i).getId().equals(id)){
-                if (Integer.parseInt(index) < userArrayList.get(i).getAskArrList().size()) {
+                if (Integer.parseInt(index) < userArrayList.get(i).getAskArrList().size() && userArrayList.get(i).getAskArrList().size() > 0) {
                     response.setStatus(204);
                     userArrayList.get(i).removeAsk(Integer.parseInt(index));
                     mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
@@ -153,7 +149,6 @@ public class userController {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.getOutputStream().print(response.getStatus());
         response.flushBuffer();
-        response.sendError(HttpServletResponse.SC_NOT_FOUND, "ID not found");
     }
 
     @PostMapping("/api/resolveSuggest/{id}")
@@ -172,7 +167,6 @@ public class userController {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.getOutputStream().print(response.getStatus());
         response.flushBuffer();
-        response.sendError(HttpServletResponse.SC_NOT_FOUND, "ID not found");
     }
 
     @PostMapping("/api/resolveAsk/{id}")
@@ -191,7 +185,6 @@ public class userController {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.getOutputStream().print(response.getStatus());
         response.flushBuffer();
-        response.sendError(HttpServletResponse.SC_NOT_FOUND, "ID not found");
     }
 
 
