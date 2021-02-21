@@ -7,9 +7,6 @@ import requests
 from components.post import postAsk
 from discord.ext import commands
 
-directory = os.path.dirname(os.path.abspath(__file__))
-listPath = os.path.join(directory, '../assets/list.json')
-
 class Ask(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
