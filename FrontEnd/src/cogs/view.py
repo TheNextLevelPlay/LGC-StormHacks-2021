@@ -20,19 +20,23 @@ class View(commands.Cog):
                 if ctx.message.author.guild_permissions.administrator or user == ctx.message.author:
                     viewId = str(user.id)
                     usrList = getSuggest(viewId)
-                    message = "```\n" + str(user) + "'s Suggestion List:\n"
-                    for i in range(len(usrList)):
-                        msgLen = len(message)
-                        if msgLen + len(usrList[i]) <= 1900:
-                            message += str(i + 1) + ". " + usrList[i] + "\n"
-                        else:
-                            message += "```"
-                            await ctx.message.author.send(message)
-                            message = "```"
-                            message += str(i + 1) + ". " + usrList[i] + "\n"
-                    message += "```"
-                    await ctx.message.author.send(message)
-                    await ctx.send("List sent to DMs.")
+                    print(len(usrList))
+                    if len(usrList) != 0:
+                        message = "```\n" + str(user) + "'s Suggestion List:\n"
+                        for i in range(len(usrList)):
+                            msgLen = len(message)
+                            if msgLen + len(usrList[i]) <= 1900:
+                                message += str(i + 1) + ". " + usrList[i] + "\n"
+                            else:
+                                message += "```"
+                                await ctx.message.author.send(message)
+                                message = "```"
+                                message += str(i + 1) + ". " + usrList[i] + "\n"
+                        message += "```"
+                        await ctx.message.author.send(message)
+                        await ctx.send("List sent to DMs.")
+                    else:
+                        await ctx.send("List is empty.")
                 else:
                     await ctx.send("You do not have permissions to access this list.")
             except:
@@ -48,25 +52,31 @@ class View(commands.Cog):
                 if ctx.message.author.guild_permissions.administrator or user == ctx.message.author:
                     viewId = str(user.id)
                     usrList = getAsk(viewId)
-                    message = "```\n" + str(user) + "'s Ask List:\n"
-                    for i in range(len(usrList)):
-                        msgLen = len(message)
-                        if msgLen + len(usrList[i]) <= 1900:
-                            message += str(i + 1) + ". " + usrList[i] + "\n"
-                        else:
-                            message += "```"
-                            await ctx.message.author.send(message)
-                            message = "```"
-                            message += str(i + 1) + ". " + usrList[i] + "\n"
-                    message += "```"
-                    await ctx.message.author.send(message)
-                    await ctx.send("List sent to DMs.")
+                    if len(usrList) != 0:
+                        message = "```\n" + str(user) + "'s Ask List:\n"
+                        for i in range(len(usrList)):
+                            msgLen = len(message)
+                            if msgLen + len(usrList[i]) <= 1900:
+                                message += str(i + 1) + ". " + usrList[i] + "\n"
+                            else:
+                                message += "```"
+                                await ctx.message.author.send(message)
+                                message = "```"
+                                message += str(i + 1) + ". " + usrList[i] + "\n"
+                        message += "```"
+                        await ctx.message.author.send(message)
+                        await ctx.send("List sent to DMs.")
+                    else:
+                        await ctx.send("List is empty.")
                 else:
                     await ctx.send("You do not have permissions to access this list.")
             except:
                 await ctx.send("User not found or list does not exist.")
         else:
             await ctx.send("Invalid arguments. Use /viewAsk <user>")
+
+    #async def viewAskAll(self, ctx):
+
 
         
 def setup(bot):
