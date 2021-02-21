@@ -20,7 +20,6 @@ class View(commands.Cog):
                 if ctx.message.author.guild_permissions.administrator or user == ctx.message.author:
                     viewId = str(user.id)
                     usrList = getSuggest(viewId)
-                    print(len(usrList))
                     if len(usrList) != 0:
                         message = "```\n" + str(user) + "'s Suggestion List:\n"
                         for i in range(len(usrList)):
@@ -40,7 +39,7 @@ class View(commands.Cog):
                 else:
                     await ctx.send("You do not have permissions to access this list.")
             except:
-                await ctx.send("User not found or list does not exist.")
+                await ctx.send("User not found.")
         else:
             await ctx.send("Invalid arguments. Use /viewSuggest <user>")
 
@@ -71,7 +70,7 @@ class View(commands.Cog):
                 else:
                     await ctx.send("You do not have permissions to access this list.")
             except:
-                await ctx.send("User not found or list does not exist.")
+                await ctx.send("User not found.")
         else:
             await ctx.send("Invalid arguments. Use /viewAsk <user>")
 
