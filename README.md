@@ -1,4 +1,4 @@
-DisConnect<a name="TOP"></a>
+Discord Bot: DisConnect<a name="TOP"></a>
 ===================
 
 - - - - 
