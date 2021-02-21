@@ -80,6 +80,7 @@ public class userController {
 
     @GetMapping("/api/getSuggestion/{id}")
     public ArrayList<String> getSpecificSuggestionList(@PathVariable String id, HttpServletResponse response) throws IOException{
+        ObjectMapper mapper = new ObjectMapper();
         for (int i = 0; i < userArrayList.size(); i++){
             if (userArrayList.get(i).getId().equals(id)){
                 response.setStatus(200);
@@ -91,17 +92,18 @@ public class userController {
         ArrayList<String> askArrList = new ArrayList<>();
         User user = new User(id, askArrList, suggestArrList);
         userArrayList.add(user);
-
+        mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
 
         response.resetBuffer();
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        response.getOutputStream().print(response.getStatus());
+        response.setStatus(HttpServletResponse.SC_CREATED);
         response.flushBuffer();
+
         return user.getSuggestArrList();
     }
 
     @GetMapping("/api/getAsk/{id}")
     public ArrayList<String> getSpecificAskList(@PathVariable String id, HttpServletResponse response) throws IOException{
+        ObjectMapper mapper = new ObjectMapper();
         for (int i = 0; i < userArrayList.size(); i++){
             if (userArrayList.get(i).getId().equals(id)){
                 response.setStatus(200);
@@ -113,11 +115,12 @@ public class userController {
         ArrayList<String> askArrList = new ArrayList<>();
         User user = new User(id, askArrList, suggestArrList);
         userArrayList.add(user);
+        mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
 
         response.resetBuffer();
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        response.getOutputStream().print(response.getStatus());
+        response.setStatus(HttpServletResponse.SC_CREATED);
         response.flushBuffer();
+
         return user.getAskArrList();
     }
 
