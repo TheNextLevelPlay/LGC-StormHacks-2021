@@ -17,20 +17,24 @@ class View(commands.Cog):
         if len(args) == 1:
             try:
                 user = ctx.message.mentions[0]
-                viewId = str(user.id)
-                usrList = getSuggest(viewId)
-                message = "```\n" + str(user) + "'s Suggestion List:\n"
-                for i in range(len(usrList)):
-                    msgLen = len(message)
-                    if msgLen + len(usrList[i]) <= 1900:
-                        message += str(i + 1) + ". " + usrList[i] + "\n"
-                    else:
-                        message += "```"
-                        await ctx.message.author.send(message)
-                        message = "```"
-                        message += str(i + 1) + ". " + usrList[i] + "\n"
-                message += "```"
-                await ctx.message.author.send(message)
+                if ctx.message.author.guild_permissions.administrator or user == ctx.message.author:
+                    viewId = str(user.id)
+                    usrList = getSuggest(viewId)
+                    message = "```\n" + str(user) + "'s Suggestion List:\n"
+                    for i in range(len(usrList)):
+                        msgLen = len(message)
+                        if msgLen + len(usrList[i]) <= 1900:
+                            message += str(i + 1) + ". " + usrList[i] + "\n"
+                        else:
+                            message += "```"
+                            await ctx.message.author.send(message)
+                            message = "```"
+                            message += str(i + 1) + ". " + usrList[i] + "\n"
+                    message += "```"
+                    await ctx.message.author.send(message)
+                    await ctx.send("List sent to DMs.")
+                else:
+                    await ctx.send("You do not have permissions to access this list.")
             except:
                 await ctx.send("User not found or list does not exist.")
         else:
@@ -41,20 +45,24 @@ class View(commands.Cog):
         if len(args) == 1:
             try:
                 user = ctx.message.mentions[0]
-                viewId = str(user.id)
-                usrList = getAsk(viewId)
-                message = "```\n" + str(user) + "'s Ask List:\n"
-                for i in range(len(usrList)):
-                    msgLen = len(message)
-                    if msgLen + len(usrList[i]) <= 1900:
-                        message += str(i + 1) + ". " + usrList[i] + "\n"
-                    else:
-                        message += "```"
-                        await ctx.message.author.send(message)
-                        message = "```"
-                        message += str(i + 1) + ". " + usrList[i] + "\n"
-                message += "```"
-                await ctx.message.author.send(message)
+                if ctx.message.author.guild_permissions.administrator or user == ctx.message.author:
+                    viewId = str(user.id)
+                    usrList = getAsk(viewId)
+                    message = "```\n" + str(user) + "'s Ask List:\n"
+                    for i in range(len(usrList)):
+                        msgLen = len(message)
+                        if msgLen + len(usrList[i]) <= 1900:
+                            message += str(i + 1) + ". " + usrList[i] + "\n"
+                        else:
+                            message += "```"
+                            await ctx.message.author.send(message)
+                            message = "```"
+                            message += str(i + 1) + ". " + usrList[i] + "\n"
+                    message += "```"
+                    await ctx.message.author.send(message)
+                    await ctx.send("List sent to DMs.")
+                else:
+                    await ctx.send("You do not have permissions to access this list.")
             except:
                 await ctx.send("User not found or list does not exist.")
         else:
