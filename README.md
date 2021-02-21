@@ -31,31 +31,31 @@ View All User Questions - !viewSuggestAll
 View All User Suggestions - !viewSuggestAll
 
 View Number of Queries - !mail
-Resolve Commands:
-Answer Question - !resolveAsk <user> <index> "<message>"
- - <user> - The user's list you want to answer from
- - <index> - The number of the question you want to answer (Optional) (Resolves all without argument)
- - "<message>" - Your answer to the question in quotations (Optional)
 
-Answer Suggestion - !resolveSuggest <user> <index> "<message>"
- - <user> - The user's list you want to answer from
- - <index> - The number of the suggestion you want to answer (Optional) (Resolves all without argument)
- - "<message>" - Your answer to the suggestion in quotations (Optional)
+Answer Question - !resolveAsk {user} {index} "{message}"
+ - {user} - The user's list you want to answer from
+ - {index} - The number of the question you want to answer (Optional) (Resolves all without argument)
+ - "{message}" - Your answer to the question in quotations (Optional)
+
+Answer Suggestion - !resolveSuggest {user} {index} "{message}"
+ - {user} - The user's list you want to answer from
+ - {index} - The number of the suggestion you want to answer (Optional) (Resolves all without argument)
+ - "{message}" - Your answer to the suggestion in quotations (Optional)
 Remove Commands:
-Remove Question - !removeAsk <index>
- - <index> - The number of the question you want to remove
+Remove Question - !removeAsk {index}
+ - {index} - The number of the question you want to remove
 
-Remove Suggestion - !removeSuggest <index>
- - <index> - The number of the suggestion you want to remove
+Remove Suggestion - !removeSuggest {index}
+ - {index} - The number of the suggestion you want to remove
 Add Commands:
-Ask - !ask "<message>"
+Ask - !ask "{message}"
  - "<message>" - The question you want to ask in quotations
 
-Suggest - !suggest "<message>"
- - "<message>" - The suggestion you want to send in quotations
+Suggest - !suggest "{message}"
+ - "{message}" - The suggestion you want to send in quotations
 Poll Commands:
-Start Poll - !poll "<options>"
- - "<options>" - The poll options you want in quotations. Can have up to 10 options
+Start Poll - !poll "{options}"
+ - "{options}" - The poll options you want in quotations. Can have up to 10 options
 
 ## Non-Administrator Commands ##
 
