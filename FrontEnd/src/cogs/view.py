@@ -13,52 +13,53 @@ class View(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def view(self, ctx, *args):
-        if len(args) == 2:
-            if args[0] == "suggest":
-                try:
-                    user = ctx.message.mentions[0]
-                    viewId = str(user.id)
-                    usrList = getSuggest(viewId)
-                    message = "```\n" + str(user) + "'s Suggestion List:\n"
-                    for i in range(len(usrList)):
-                        msgLen = len(message)
-                        if msgLen + len(usrList[i]) <= 1900:
-                            message += str(i + 1) + ". " + usrList[i] + "\n"
-                        else:
-                            message += "```"
-                            await ctx.message.author.send(message)
-                            message = "```"
-                            message += str(i + 1) + ". " + usrList[i] + "\n"
-                    message += "```"
-                    await ctx.message.author.send(message)
-                except:
-                    await ctx.send("User not found or list was empty.")
-            elif args[0] == "ask":
-                try:
-                    user = ctx.message.mentions[0]
-                    viewId = str(user.id)
-                    usrList = getAsk(viewId)
-                    message = "```\n" + str(user) + "'s Ask List:\n"
-                    for i in range(len(usrList)):
-                        msgLen = len(message)
-                        if msgLen + len(usrList[i]) <= 1900:
-                            message += str(i + 1) + ". " + usrList[i] + "\n"
-                        else:
-                            message += "```"
-                            await ctx.message.author.send(message)
-                            message = "```"
-                            message += str(i + 1) + ". " + usrList[i] + "\n"
-                    message += "```"
-                    await ctx.message.author.send(message)
-                except:
-                    await ctx.send("User not found or list was empty.")
-            else:
-                await ctx.send("Invalid argument. Use /view <type> <user>")
+    async def viewSuggest(self, ctx, *args):
+        if len(args) == 1:
+            try:
+                user = ctx.message.mentions[0]
+                viewId = str(user.id)
+                usrList = getSuggest(viewId)
+                message = "```\n" + str(user) + "'s Suggestion List:\n"
+                for i in range(len(usrList)):
+                    msgLen = len(message)
+                    if msgLen + len(usrList[i]) <= 1900:
+                        message += str(i + 1) + ". " + usrList[i] + "\n"
+                    else:
+                        message += "```"
+                        await ctx.message.author.send(message)
+                        message = "```"
+                        message += str(i + 1) + ". " + usrList[i] + "\n"
+                message += "```"
+                await ctx.message.author.send(message)
+            except:
+                await ctx.send("User not found or list does not exist.")
         else:
-            await ctx.send("Invalid use. Use /view <type> <user>")
+            await ctx.send("Invalid arguments. Use /viewSuggest <user>")
+
+    @commands.command()
+    async def viewAsk(self, ctx, *args):
+        if len(args) == 1:
+            try:
+                user = ctx.message.mentions[0]
+                viewId = str(user.id)
+                usrList = getAsk(viewId)
+                message = "```\n" + str(user) + "'s Ask List:\n"
+                for i in range(len(usrList)):
+                    msgLen = len(message)
+                    if msgLen + len(usrList[i]) <= 1900:
+                        message += str(i + 1) + ". " + usrList[i] + "\n"
+                    else:
+                        message += "```"
+                        await ctx.message.author.send(message)
+                        message = "```"
+                        message += str(i + 1) + ". " + usrList[i] + "\n"
+                message += "```"
+                await ctx.message.author.send(message)
+            except:
+                await ctx.send("User not found or list does not exist.")
+        else:
+            await ctx.send("Invalid arguments. Use /viewAsk <user>")
 
         
-
 def setup(bot):
     bot.add_cog(View(bot))
