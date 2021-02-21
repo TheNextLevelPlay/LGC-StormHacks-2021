@@ -53,12 +53,24 @@ public class User {
         this.askArrListSize = this.askArrList.size();
     }
 
-    public void removeSuggest(){
-
+    public void removeSuggest(int index){
+        this.suggestArrList.remove(index);
+        this.suggestArrListSize = this.suggestArrList.size();
     }
 
-    public void removeAsk(){
+    public void removeAsk(int index){
+        this.askArrList.remove(index);
+        this.askArrListSize = this.askArrList.size();
+    }
 
+    public void clearSuggest(){
+        this.suggestArrList.clear();
+        this.suggestArrListSize = 0;
+    }
+
+    public void clearAsk(){
+        this.askArrList.clear();
+        this.askArrListSize = 0;
     }
 
     @Override

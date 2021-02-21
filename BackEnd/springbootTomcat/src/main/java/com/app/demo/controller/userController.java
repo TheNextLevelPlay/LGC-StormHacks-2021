@@ -113,13 +113,18 @@ public class userController {
     }
 
     @PostMapping("/api/rmSuggest/{id}")
-    public void removeSuggestionFromList(@PathVariable String id, int index, HttpServletResponse response) throws IOException{
+    public void removeSuggestionFromList(@PathVariable String id, @RequestBody String index, HttpServletResponse response) throws IOException{
         ObjectMapper mapper = new ObjectMapper();
+
         for (int i = 0; i < userArrayList.size(); i++){
             if (userArrayList.get(i).getId().equals(id)){
-                response.setStatus(204);
-                userArrayList.get(i).getSuggestArrList().remove(index);
-                mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
+                if (Integer.parseInt(index) < userArrayList.get(i).getSuggestArrList().size()) {
+                    response.setStatus(204);
+                    System.out.println(index);
+                    userArrayList.get(i).removeSuggest(Integer.parseInt(index));
+                    mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
+                    return;
+                }
             }
         }
 
@@ -131,13 +136,16 @@ public class userController {
     }
 
     @PostMapping("/api/rmAsk/{id}")
-    public void removeAskFromList(@PathVariable String id, int index, HttpServletResponse response) throws IOException{
+    public void removeAskFromList(@PathVariable String id, @RequestBody String index, HttpServletResponse response) throws IOException{
         ObjectMapper mapper = new ObjectMapper();
         for (int i = 0; i < userArrayList.size(); i++){
             if (userArrayList.get(i).getId().equals(id)){
-                response.setStatus(204);
-                userArrayList.get(i).getAskArrList().remove(index);
-                mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
+                if (Integer.parseInt(index) < userArrayList.get(i).getAskArrList().size()) {
+                    response.setStatus(204);
+                    userArrayList.get(i).removeAsk(Integer.parseInt(index));
+                    mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
+                    return;
+                }
             }
         }
 
@@ -154,8 +162,9 @@ public class userController {
         for (int i = 0; i < userArrayList.size(); i++){
             if (userArrayList.get(i).getId().equals(id)){
                 response.setStatus(204);
-                userArrayList.get(i).getSuggestArrList().clear();
+                userArrayList.get(i).clearSuggest();
                 mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
+                return;
             }
         }
 
@@ -172,8 +181,9 @@ public class userController {
         for (int i = 0; i < userArrayList.size(); i++){
             if (userArrayList.get(i).getId().equals(id)){
                 response.setStatus(204);
-                userArrayList.get(i).getAskArrList().clear();
+                userArrayList.get(i).clearAsk();
                 mapper.writeValue(Paths.get("src/main/resources/data/query.json").toFile(), userArrayList);
+                return;
             }
         }
 

@@ -12,7 +12,7 @@ client.remove_command("help")
 
 token = os.getenv('DISCORD_TOKEN')
 
-extensionList = ['cogs.ask', 'cogs.poll', 'cogs.suggest']
+extensionList = ['cogs.ask', 'cogs.poll', 'cogs.suggest', 'cogs.resolve']
 
 if __name__ == '__main__':
     for extension in extensionList:
