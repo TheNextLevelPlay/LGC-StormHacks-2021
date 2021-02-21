@@ -10,3 +10,6 @@ def getAsk(id):
     print(url)
     return(requests.get(url).json())
 
+def getUsers():
+    url = "http://localhost:8080/api/getUserList"
+    return(requests.get(url).json())
