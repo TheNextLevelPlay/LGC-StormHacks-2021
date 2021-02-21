@@ -18,7 +18,7 @@ A discord bot that allows the students to raise issues, ask questions, create su
 
 - - - - 
 # Commands #
-_(note that the only the administrator can use administrator commands)_
+_note that the only the administrator can use administrator commands however administrator can use non-administrator commands_
 ## Administrator Commands ##
 View Questions - !viewAsk {user}
  - {user} - The user's question list you want to look up (Optional) (Checks own list without argument)
