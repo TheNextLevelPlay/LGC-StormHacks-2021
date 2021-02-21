@@ -21,10 +21,10 @@ A discord bot that allows the students to raise issues, ask questions, create su
 _(note that the only the administrator can use administrator commands)_
 ## Administrator Commands ##
 View Questions - !viewAsk {user}
- - <user> - The user's question list you want to look up (Optional) (Checks own list without argument)
+ - {user} - The user's question list you want to look up (Optional) (Checks own list without argument)
 
-View Suggestions - !viewSuggest <user>
- - <user> -  The user's question list you want to look up (Optional) (Checks own list without argument)
+View Suggestions - !viewSuggest {user}
+ - {user} -  The user's question list you want to look up (Optional) (Checks own list without argument)
 
 View All User Questions - !viewSuggestAll
 
